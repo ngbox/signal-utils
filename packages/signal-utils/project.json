@@ -1,0 +1,51 @@
+{
+  "name": "signal-utils",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/signal-utils/src",
+  "prefix": "lib",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "packages/signal-utils/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "packages/signal-utils/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "packages/signal-utils/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/signal-utils/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "packages/signal-utils/**/*.ts",
+          "packages/signal-utils/**/*.html",
+          "packages/signal-utils/package.json"
+        ]
+      }
+    }
+  }
+}
