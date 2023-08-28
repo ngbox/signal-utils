@@ -11,7 +11,7 @@ import { SignalOperatorFunction } from './types';
 import { isUndefined } from './utils';
 
 export function debounceTime<T>(
-  time: number,
+  dueTime: number,
   initialValue?: T,
   options: SignalDebounceTimeOptions<T> = {}
 ): SignalOperatorFunction<T, T> {
@@ -26,7 +26,7 @@ export function debounceTime<T>(
 
         const timeout = setTimeout(
           () => debouncedSignal.set(sourceValue),
-          time
+          dueTime
         );
 
         cleanup(() => clearTimeout(timeout));

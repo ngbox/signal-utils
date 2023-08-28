@@ -3,9 +3,9 @@ import { CreateSignalOptions, effect, signal } from '@angular/core';
 export function interval(
   period = 0,
   initialValue = 0,
-  options: SignalIntervalOptions<number> = {}
+  options: SignalIntervalOptions = {}
 ) {
-  const source = signal(initialValue, options);
+  const source = signal<number>(initialValue, options);
 
   if (period <= 0) {
     period = 1;
@@ -20,4 +20,4 @@ export function interval(
   });
 }
 
-export type SignalIntervalOptions<T> = CreateSignalOptions<T>;
+export type SignalIntervalOptions = CreateSignalOptions<number>;

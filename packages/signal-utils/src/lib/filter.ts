@@ -11,7 +11,7 @@ import { SignalOperatorFunction } from './types';
 import { isUndefined } from './utils';
 
 export function filter<T>(
-  filterFn: (value: T) => boolean,
+  predicate: (value: T) => boolean,
   initialValue: T,
   options: SignalFilterOptions<T> = {}
 ): SignalOperatorFunction<T, T> {
@@ -23,7 +23,7 @@ export function filter<T>(
     effect(
       () => {
         const sourceValue = source();
-        filterFn(sourceValue) && filteredSignal.set(sourceValue);
+        predicate(sourceValue) && filteredSignal.set(sourceValue);
       },
       { ...options, allowSignalWrites: true }
     );

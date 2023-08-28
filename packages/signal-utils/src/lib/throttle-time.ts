@@ -10,7 +10,7 @@ import {
 import { SignalOperatorFunction } from './types';
 
 export function throttleTime<T>(
-  time: number,
+  throttleDuration: number,
   options: SignalThrottleTimeOptions<T> = {}
 ): SignalOperatorFunction<T, T> {
   return (source: Signal<T>): Signal<T> => {
@@ -33,7 +33,7 @@ export function throttleTime<T>(
       timeout = setTimeout(() => {
         throttling = false;
         clear();
-      }, time);
+      }, throttleDuration);
     };
 
     startThrottling();

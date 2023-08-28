@@ -10,12 +10,12 @@ import {
 import { SignalOperatorFunction } from './types';
 
 export function bufferCount<T>(
-  count: number,
+  bufferSize: number,
   initialValue: Array<T> = [],
   options: SignalBufferCountOptions<T> = {}
 ): SignalOperatorFunction<T, T[]> {
-  if (count <= 0) {
-    count = 1;
+  if (bufferSize <= 0) {
+    bufferSize = 1;
   }
 
   return (source: Signal<T>): Signal<T[]> => {
@@ -43,7 +43,7 @@ export function bufferCount<T>(
     };
 
     const shouldEmit = () => {
-      return index === count;
+      return index === bufferSize;
     };
 
     effect(
