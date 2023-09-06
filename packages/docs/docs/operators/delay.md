@@ -8,7 +8,7 @@ sidebar_position: 6
 <br/><br/>
 
 ```ts
-delay<T>(delayDuration: number, initialValue: T, options: SignalDelayOptions<T> = {}): T
+delay<T>(delayDuration: number, options: SignalDelayOptions<T> = {}): T
 ```
 
 ## Parameters
@@ -20,15 +20,6 @@ delay<T>(delayDuration: number, initialValue: T, options: SignalDelayOptions<T> 
         <code>delayDuration</code>
       </td>
       <td>The duration (in milliseconds) by which to delay the emissions</td>
-    </tr>
-    <tr>
-      <td> 
-        <code>initialValue</code>
-      </td>
-      <td>
-        The initial value to emit before introducing the specified delay.
-        Optional. Default is <code>undefined</code>
-      </td>
     </tr>
     <tr>
       <td> 
@@ -53,5 +44,5 @@ Display the delayed progress after a 2000 millisecond delay.
 
 ```ts
 progress = signal(0);
-delayedProgress = pipeSignal(source, delay(2000);
+delayedProgress = pipeSignal(source, delay(2000));
 ```

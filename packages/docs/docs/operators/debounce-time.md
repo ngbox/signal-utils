@@ -9,7 +9,7 @@ This can be useful for scenarios where you want to react to changes in a signal 
 <br/><br/>
 
 ```ts
-debounceTime<T>(dueTime: number, initialValue?: T, options: SignalDebounceTimeOptions<T> = {}): T
+debounceTime<T>(dueTime: number, options: SignalDebounceTimeOptions<T> = {}): T
 ```
 
 ## Parameters
@@ -22,15 +22,6 @@ debounceTime<T>(dueTime: number, initialValue?: T, options: SignalDebounceTimeOp
       </td>
       <td>
         The amount of time (in milliseconds) to wait after a signal is emitted before allowing it to be further processed. If another signal is emitted during this delay period, the timer resets
-      </td>
-    </tr>
-    <tr>
-      <td> 
-        <code>initialValue</code>
-      </td>
-      <td>
-        The initial value of the buffered array. This value will be used until the first buffer-counted emit occurs.
-        Optional. Default is <code>undefined</code>
       </td>
     </tr>
     <tr>
@@ -55,8 +46,5 @@ debounceTime<T>(dueTime: number, initialValue?: T, options: SignalDebounceTimeOp
 
 ```ts
 searchQuery: Signal<string> = signal('');
-debouncedSearchQuery: Signal<string> = pipeSignal(
-  source,
-  debounceTime(500, '')
-);
+debouncedSearchQuery: Signal<string> = pipeSignal(source, debounceTime(500));
 ```

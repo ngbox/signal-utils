@@ -23,15 +23,6 @@ throttleTime<T>(throttleDuration: number, options: SignalThrottleTimeOptions<T> 
     </tr>
     <tr>
       <td> 
-        <code>initialValue</code>
-      </td>
-      <td>
-        The initial value of the buffered array. This value will be used until the first buffer-counted emit occurs.
-        Optional. Default is <code>[]</code>
-      </td>
-    </tr>
-    <tr>
-      <td> 
         <code>options</code>
       </td>
       <td>

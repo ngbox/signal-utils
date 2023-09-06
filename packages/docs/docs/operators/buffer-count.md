@@ -8,7 +8,7 @@ sidebar_position: 6
 <br/><br/>
 
 ```ts
-bufferCount<T>(bufferSize: number, initialValue: Array<T> = [], options: SignalBufferCountOptions<T> = {}): T[]
+bufferCount<T>(bufferSize: number, options: SignalBufferCountOptions<T> = {}): T[]
 ```
 
 ## Parameters
@@ -21,15 +21,6 @@ bufferCount<T>(bufferSize: number, initialValue: Array<T> = [], options: SignalB
       </td>
       <td> The number of consecutive values to collect before emitting a buffered array</td>
     </tr>
-    <tr>
-      <td> 
-        <code>initialValue</code>
-      </td>
-      <td>
-        The initial value of the buffered array. This value will be used until the first buffer-counted emit occurs.
-        Optional. Default is <code>[]</code>
-      </td>
-    </tr>
   </tbody>
 </table>
 
@@ -39,6 +30,8 @@ bufferCount<T>(bufferSize: number, initialValue: Array<T> = [], options: SignalB
 
 ```ts
 stockPrice: Signal<number> = signal(10);
-initialBuffer: number[] = [0, 0, 0]; // Initial values for stock prices
-bufferedStockPriceHistory: Signal<number[]>  = pipeSignal(source, bufferCount(3, initialBuffer)); // Analyze or visualize the buffered stock price history
+bufferedStockPriceHistory: Signal<number[]> = pipeSignal(
+  source,
+  bufferCount(3)
+); // Analyze or visualize the buffered stock price history
 ```

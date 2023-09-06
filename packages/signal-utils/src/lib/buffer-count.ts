@@ -11,7 +11,6 @@ import { SignalOperatorFunction } from './types';
 
 export function bufferCount<T>(
   bufferSize: number,
-  initialValue: Array<T> = [],
   options: SignalBufferCountOptions<T> = {}
 ): SignalOperatorFunction<T, T[]> {
   if (bufferSize <= 0) {
@@ -24,13 +23,10 @@ export function bufferCount<T>(
     let index = 0;
     let values: Array<T> = [];
 
-    const bufferCountedSignal: WritableSignal<Array<T>> = signal<Array<T>>(
-      initialValue,
-      {
-        ...options,
-        equal: () => false,
-      }
-    );
+    const bufferCountedSignal: WritableSignal<Array<T>> = signal<Array<T>>([], {
+      ...options,
+      equal: () => false,
+    });
 
     const pushValue = (value: T) => {
       index++;

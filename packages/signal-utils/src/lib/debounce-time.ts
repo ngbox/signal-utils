@@ -8,17 +8,14 @@ import {
   signal,
 } from '@angular/core';
 import { SignalOperatorFunction } from './types';
-import { isUndefined } from './utils';
 
 export function debounceTime<T>(
   dueTime: number,
-  initialValue?: T,
   options: SignalDebounceTimeOptions<T> = {}
 ): SignalOperatorFunction<T, T> {
   return (source: Signal<T>): Signal<T> => {
     options.injector ?? assertInInjectionContext(debounceTime);
-    const value = isUndefined(initialValue) ? source() : initialValue;
-    const debouncedSignal: WritableSignal<T> = signal(value, options);
+    const debouncedSignal: WritableSignal<T> = signal(source(), options);
 
     effect(
       (cleanup) => {

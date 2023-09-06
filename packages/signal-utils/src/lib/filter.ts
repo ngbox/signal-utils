@@ -8,17 +8,18 @@ import {
   signal,
 } from '@angular/core';
 import { SignalOperatorFunction } from './types';
-import { isUndefined } from './utils';
 
 export function filter<T>(
   predicate: (value: T) => boolean,
-  initialValue: T,
-  options: SignalFilterOptions<T> = {}
-): SignalOperatorFunction<T, T> {
-  return (source: Signal<T>): Signal<T> => {
+  options: SignalFilterOptions<T | undefined> = {}
+): SignalOperatorFunction<T, T | undefined> {
+  return (source: Signal<T>): Signal<T | undefined> => {
     options.injector ?? assertInInjectionContext(filter);
-    const value = isUndefined(initialValue) ? source() : initialValue;
-    const filteredSignal: WritableSignal<T> = signal(value, options);
+    const value = predicate(source()) ? source() : undefined;
+    const filteredSignal: WritableSignal<T | undefined> = signal(
+      value,
+      options
+    );
 
     effect(
       () => {

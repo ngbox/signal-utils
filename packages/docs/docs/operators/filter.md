@@ -8,7 +8,7 @@ sidebar_position: 6
 <br/><br/>
 
 ```ts
-filter<T>(filterFn: (value: T) => boolean, initialValue: T, options: SignalFilterOptions<T> = {}): T
+filter<T>(filterFn: (value: T) => boolean, options: SignalFilterOptions<T> = {}): T
 ```
 
 ## Parameters
@@ -17,17 +17,9 @@ filter<T>(filterFn: (value: T) => boolean, initialValue: T, options: SignalFilte
   <tbody>
     <tr>
       <td>
-        <code>filterFn</code>
+        <code>predicate</code>
       </td>
       <td>A predicate function that determines whether a signal should be emitted <code>true</code> or filtered out <code>false</code>.</td>
-    </tr>
-    <tr>
-      <td> 
-        <code>initialValue</code>
-      </td>
-      <td>
-        The initial value to emit before the first emit.
-      </td>
     </tr>
     <tr>
       <td> 
@@ -50,5 +42,5 @@ filter<T>(filterFn: (value: T) => boolean, initialValue: T, options: SignalFilte
 
 ```ts
 userActivity = signal(0);
-filteredActivity = pipeSignal(userActivity, filter((activity) => activity !== 'Inactive', 'No recent activity');
+filteredActivity = pipeSignal(userActivity, filter((activity) => activity !== 'Inactive');
 ```
