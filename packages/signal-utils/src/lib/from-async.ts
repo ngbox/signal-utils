@@ -19,14 +19,16 @@ import {
 export type FromAsyncOptions<T> = CreateSignalOptions<T> &
   CreateEffectOptions & { initialValue: T | null };
 
-export function fromAsync<T, K>(
-  observable$: Observable<T>,
-  options: FromAsyncOptions<T>
-): {
+export interface FromAsyncResponse<T, K> {
   data: Signal<T | null>;
   loading: Signal<boolean>;
   error: Signal<K | null>;
-} {
+}
+
+export function fromAsync<T, K>(
+  observable$: Observable<T>,
+  options: FromAsyncOptions<T>
+): FromAsyncResponse<T, K> {
   options.injector ?? assertInInjectionContext(fromAsync);
   const injector = options.injector ?? inject(Injector);
   const destroyRef = injector.get(DestroyRef);
