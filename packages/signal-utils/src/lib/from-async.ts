@@ -40,7 +40,7 @@ export function fromAsync<T, K>(
   const data = signal<T | null>(options.initialValue);
   const error = signal<K | null>(null);
 
-  const startFetching = () => {
+  const startFetching = (): void => {
     observable$
       .pipe(
         catchError((err) => {

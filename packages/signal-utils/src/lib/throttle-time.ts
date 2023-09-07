@@ -22,13 +22,13 @@ export function throttleTime<T>(
     let timeout: any | undefined;
     let throttling: boolean;
 
-    const clear = () => {
+    const clear = (): void => {
       clearTimeout(timeout);
       timeout = undefined;
       throttling = false;
     };
 
-    const startThrottling = () => {
+    const startThrottling = (): void => {
       throttling = true;
       timeout = setTimeout(() => {
         throttling = false;

@@ -28,17 +28,17 @@ export function bufferCount<T>(
       equal: () => false,
     });
 
-    const pushValue = (value: T) => {
+    const pushValue = (value: T): void => {
       index++;
       values.push(value);
     };
 
-    const clear = () => {
+    const clear = (): void => {
       values = [];
       index = 0;
     };
 
-    const shouldEmit = () => {
+    const shouldEmit = (): boolean => {
       return index === bufferSize;
     };
 

@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "nx",
+    "lint": "nx run-many --all --target=lint",
     "nx": "nx"
   },
   "private": true,

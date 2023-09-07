@@ -84,12 +84,14 @@ export function pipeSignal<T, A, B, C, D, E, F, G, H, I>(
   fn7: SignalOperatorFunction<F, G>,
   fn8: SignalOperatorFunction<G, H>,
   fn9: SignalOperatorFunction<H, I>,
-  ...fns: SignalOperatorFunction<any, any>[]
+  ...fns: SignalOperatorFunction<unknown, unknown>[]
 ): Signal<unknown>;
 
 export function pipeSignal<T>(
   source: Signal<T>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ...pipeSignalKinds: Array<SignalOperatorFunction<T, any>>
-) {
+): // eslint-disable-next-line @typescript-eslint/no-explicit-any
+Signal<any> {
   return pipeSignalKinds.reduce((prev, fn) => fn(prev), source);
 }

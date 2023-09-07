@@ -1,10 +1,10 @@
-import { CreateSignalOptions, effect, signal } from '@angular/core';
+import { CreateSignalOptions, Signal, effect, signal } from '@angular/core';
 
 export function interval(
   period = 0,
   initialValue = 0,
   options: SignalIntervalOptions = {}
-) {
+): Signal<number> {
   const source = signal<number>(initialValue, options);
 
   if (period <= 0) {
@@ -18,6 +18,8 @@ export function interval(
   effect((cleanUp) => cleanUp(() => clearInterval(interval)), {
     manualCleanup: true,
   });
+
+  return source.asReadonly();
 }
 
 export type SignalIntervalOptions = CreateSignalOptions<number>;
