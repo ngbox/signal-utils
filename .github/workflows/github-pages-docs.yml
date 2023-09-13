@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: 18.x
           cache: 'npm'
-      - run: npm i
+      - run: npm ci
       - run: npm run nx build docs
       - name: Upload artifact to enable deployment
         uses: actions/upload-artifact@v3
