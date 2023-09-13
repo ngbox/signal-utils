@@ -8,8 +8,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Signal Utils',
   tagline: 'Powerful library to interact with Angular Signals API',
-  url: 'https://ngturkey.org',
-  baseUrl: '/',
+  url: 'https://ngbox.github.io',
+  baseUrl: '/signal-utils/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
