@@ -5,7 +5,7 @@ name: Github Pages - Docs
 
 on:
   push:
-    branches: ['docs/pages-implementation']
+    branches: ['main']
 
 jobs:
   build:
