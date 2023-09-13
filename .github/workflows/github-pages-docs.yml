@@ -12,13 +12,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: latest
+          run_install: false
       - name: Use Node.js 18.x
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run nx build docs
+          cache: 'pnpm'
+      - run: pnpm i --frozen-lockfile
+      - run: pnpm run nx build docs
       - name: Upload artifact to enable deployment
         uses: actions/upload-artifact@v3
         with:
