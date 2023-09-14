@@ -45,6 +45,7 @@ export function fromAsync<T, K>(
       .pipe(
         catchError((err) => {
           error.set(err);
+          loading.set(false);
           return throwError(() => err);
         }),
         takeUntil(destroyer$)
