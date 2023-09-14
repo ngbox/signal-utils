@@ -13,11 +13,11 @@ To start using Your Signal Library in your Angular project, follow these steps:
 1. Install the library using npm or yarn:
 
 ```sh
- npm install ng-signal-utils
+ npm install @ngbox/signal-utils
 ```
 
 ```sh
- yarn add ng-signal-utils
+ yarn add @ngbox/signal-utils
 ```
 
 ## Using Signal Operators
