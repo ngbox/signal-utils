@@ -2,17 +2,18 @@ import {
   CreateEffectOptions,
   CreateSignalOptions,
   DestroyRef,
-  Injector,
   Signal,
   assertInInjectionContext,
-  inject,
   signal,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   Observable,
-  ReplaySubject,
   catchError,
-  takeUntil,
+  Subject,
+  startWith,
+  tap,
+  switchMap,
   throwError,
 } from 'rxjs';
 
@@ -23,6 +24,7 @@ export interface FromAsyncResponse<T, K> {
   data: Signal<T | null>;
   loading: Signal<boolean>;
   error: Signal<K | null>;
+  refresh: () => void;
 }
 
 export function fromAsync<T, K>(
@@ -30,25 +32,26 @@ export function fromAsync<T, K>(
   options: FromAsyncOptions<T>
 ): FromAsyncResponse<T, K> {
   options.injector ?? assertInInjectionContext(fromAsync);
-  const injector = options.injector ?? inject(Injector);
-  const destroyRef = injector.get(DestroyRef);
-
-  const destroyer$ = new ReplaySubject<void>(1);
-  destroyRef.onDestroy(() => destroyer$.next());
+  const refresher$ = new Subject<void>();
 
   const loading = signal(false);
   const data = signal<T | null>(options.initialValue);
   const error = signal<K | null>(null);
 
+  const onError = (err: K): Observable<never> => {
+    error.set(err);
+    loading.set(false);
+    return throwError(() => err);
+  };
+
   const startFetching = (): void => {
-    observable$
+    refresher$
       .pipe(
-        catchError((err) => {
-          error.set(err);
-          loading.set(false);
-          return throwError(() => err);
-        }),
-        takeUntil(destroyer$)
+        startWith(0),
+        tap(() => loading.set(true)),
+        switchMap(() => observable$),
+        catchError(onError),
+        takeUntilDestroyed(options.injector?.get(DestroyRef))
       )
       .subscribe((resp) => {
         data.set(resp);
@@ -56,11 +59,14 @@ export function fromAsync<T, K>(
       });
   };
 
+  const refresh = (): void => refresher$.next();
+
   startFetching();
 
   return {
     loading,
     data,
+    refresh,
     error,
   };
 }
