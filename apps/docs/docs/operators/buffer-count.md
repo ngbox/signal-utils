@@ -21,6 +21,18 @@ bufferCount<T>(bufferSize: number, options: SignalBufferCountOptions<T> = {}): T
       </td>
       <td> The number of consecutive values to collect before emitting a buffered array</td>
     </tr>
+    <tr>
+      <td> 
+        <code>options</code>
+      </td>
+      <td>
+        Optional.
+        The combination of
+        <a target="_blank" href="https://angular.io/api/core/CreateEffectOptions"> CreateEffectOptions </a> and 
+        <a target="_blank" href="https://angular.io/api/core/CreateSignalOptions"> CreateSignalOptions </a>
+        (excluding the <code>equal</code> and <code>allowSignalWrites</code> properties)
+      </td>
+    </tr>
   </tbody>
 </table>
 
