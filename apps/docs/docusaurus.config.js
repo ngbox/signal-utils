@@ -48,7 +48,7 @@ const config = {
         title: 'Signal Utils',
         logo: {
           alt: 'Signal Utils Logo',
-          src: 'img/logo.svg',
+          src: 'img/ngbox-compact.png',
         },
         items: [
           {
