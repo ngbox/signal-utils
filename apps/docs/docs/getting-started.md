@@ -20,7 +20,7 @@ To start using Your Signal Library in your Angular project, follow these steps:
  yarn add @ngbox/signal-utils
 ```
 
-## Using Signal Operators
+## Use Signal Operators and Utilities
 
 Signal Utils provides operators that allow you to transform, filter, debounce, and more, just like in RxJS. Here's an example using the <code>filter</code> operator.
 
