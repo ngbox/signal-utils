@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { TodosComponent } from './todos/todos.component';
+import { OperatorsComponent } from './operators/operators.component';
 
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent],
+  imports: [TodosComponent, OperatorsComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  title = 'demo';
-}
+export class AppComponent {}

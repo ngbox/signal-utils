@@ -1,0 +1,15 @@
+.container-loading {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+
+.list-group-item {
+  cursor: pointer;
+  user-select: none;
+}

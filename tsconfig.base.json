@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "signal-utils": ["packages/signal-utils/src/index.ts"]
+      "@ngbox/signal-utils": ["packages/signal-utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
