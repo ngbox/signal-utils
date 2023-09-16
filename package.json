@@ -2,14 +2,13 @@
   "name": "signal-utils-nx",
   "version": "0.0.0",
   "license": "MIT",
-  "private": true,
+  "engineStrict": true,
   "scripts": {
     "ng": "nx",
     "nx": "nx",
     "lint": "nx affected:lint --fix",
     "preinstall": "npx only-allow pnpm"
   },
-  "engineStrict": true,
   "engines": {
     "node": ">=18",
     "pnpm": ">=8"

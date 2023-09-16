@@ -1,8 +1,28 @@
 {
-  "name": "signal-utils",
+  "name": "@ngbox/signal-utils",
   "version": "0.0.1",
+  "description": "Powerful library to interact with Angular Signals API",
   "license": "MIT",
   "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "bugs": {
+    "url": "https://github.com/ngbox/signal-utils/issues"
+  },
+  "homepage": "https://ngbox.github.io/signal-utils",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ngbox/signal-utils"
+  },
+  "keywords": [
+    "angular",
+    "angular 2",
+    "angular signals",
+    "signals",
+    "signals rxjs",
+    "signal utils"
+  ],
   "peerDependencies": {
     "@angular/core": ">=16.0.0"
   },
