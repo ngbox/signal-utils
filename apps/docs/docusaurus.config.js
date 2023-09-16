@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Signal Utils',
-  tagline: 'Powerful library to interact with Angular Signals API',
+  tagline: 'Unleash the Full Potential of Angular Signals with Ease',
   url: 'https://ngbox.github.io',
   baseUrl: '/signal-utils/',
   onBrokenLinks: 'throw',

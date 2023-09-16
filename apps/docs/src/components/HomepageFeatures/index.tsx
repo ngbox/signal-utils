@@ -10,32 +10,32 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'Unlock Efficiency',
+    Svg: require('@site/static/img/lock.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Say goodbye to cumbersome code. With our library's intuitive operators,
+        you can create, transform, and manipulate Angular Signals effortlessly.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'Customize to Perfection',
+    Svg: require('@site/static/img/customize.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Tailor your signals with precision. Apply debounce, filtering, and more
+        - just like the pros do with RxJS operators.
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: 'Comprehensive Documentation',
+    Svg: require('@site/static/img/docs.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Our extensive documentation ensures you can hit the ground running,
+        whether you're a novice or an expert.
       </>
     ),
   },
