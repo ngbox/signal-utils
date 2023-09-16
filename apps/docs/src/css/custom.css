@@ -28,10 +28,10 @@
   --ifm-color-primary-lighter: #e69b99;
   --ifm-color-primary-lightest: #f0c3c2;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
 
-  .footer.footer--dark {
-    background-color: var(--ifm-background-surface-color) !important;
-  }
+[data-theme='dark'] .footer.footer--dark {
+  background-color: var(--ifm-background-surface-color) !important;
 }
 
 /* 
