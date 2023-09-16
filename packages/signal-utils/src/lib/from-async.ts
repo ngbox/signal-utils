@@ -3,6 +3,7 @@ import {
   CreateSignalOptions,
   DestroyRef,
   Signal,
+  WritableSignal,
   assertInInjectionContext,
   signal,
 } from '@angular/core';
@@ -18,10 +19,10 @@ import {
 } from 'rxjs';
 
 export type FromAsyncOptions<T> = CreateSignalOptions<T> &
-  CreateEffectOptions & { initialValue: T | null };
+  CreateEffectOptions & { initialValue: T };
 
 export interface FromAsyncResponse<T, K> {
-  data: Signal<T | null>;
+  data: WritableSignal<T>;
   loading: Signal<boolean>;
   error: Signal<K | null>;
   refresh: () => void;
@@ -35,7 +36,7 @@ export function fromAsync<T, K>(
   const refresher$ = new Subject<void>();
 
   const loading = signal(false);
-  const data = signal<T | null>(options.initialValue);
+  const data = signal<T>(options.initialValue);
   const error = signal<K | null>(null);
 
   const onError = (err: K): Observable<never> => {
@@ -64,9 +65,9 @@ export function fromAsync<T, K>(
   startFetching();
 
   return {
-    loading,
+    loading: loading.asReadonly(),
     data,
     refresh,
-    error,
+    error: error.asReadonly(),
   };
 }

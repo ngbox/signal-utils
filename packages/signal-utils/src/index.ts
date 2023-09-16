@@ -8,3 +8,4 @@ export { pipeSignal } from './lib/pipe-signal';
 // export { tap, SignalTapOptions } from './lib/tap';
 export { throttleTime, SignalThrottleTimeOptions } from './lib/throttle-time';
 export { SignalOperatorFunction } from './lib/types';
+export { fromAsync } from './lib/from-async';

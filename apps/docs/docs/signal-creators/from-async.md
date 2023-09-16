@@ -27,11 +27,10 @@ fromAsync<DataType, ErrorType>(observable$: Observable<T>, options: FromAsyncOpt
         <code>options</code>
       </td>
       <td>
-        Optional.
         The combination of
         <a target="_blank" href="https://angular.io/api/core/CreateEffectOptions"> CreateEffectOptions </a> and 
         <a target="_blank" href="https://angular.io/api/core/CreateSignalOptions"> CreateSignalOptions </a> and
-        <code>initialValue</code> which represent the value of <code>data</code> signal until the fetch is completed successfully.
+        <code>initialValue*</code> which represent the value of <code>data</code> signal until the fetch is completed successfully.
       </td>
     </tr>
   </tbody>
