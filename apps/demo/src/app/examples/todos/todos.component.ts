@@ -10,7 +10,7 @@ import { fromAsync } from '@ngbox/signal-utils';
   standalone: true,
   imports: [NgFor, NgIf, JsonPipe, NgClass],
 })
-export class TodosComponent {
+export default class TodosComponent {
   private obs$ = inject(TodoService).getTodos();
   query = fromAsync(this.obs$, { initialValue: [] });
 

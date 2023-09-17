@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { TodosComponent } from './todos/todos.component';
-import { OperatorsComponent } from './operators/operators.component';
+import { RouterOutlet } from '@angular/router';
+import { NavbarComponent } from './navbar/navbar.component';
+import { FooterComponent } from './footer/footer.component';
 
 @Component({
-  standalone: true,
-  imports: [TodosComponent, OperatorsComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [RouterOutlet, NavbarComponent, FooterComponent],
 })
 export class AppComponent {}

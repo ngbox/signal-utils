@@ -1,0 +1,75 @@
+<div class="container">
+  <h1 class="py-4">Operators</h1>
+  <ul class="list-group">
+    <li class="list-group-item bg-dark text-white">
+      <span>source</span>
+      <span>{{ source() }}</span>
+    </li>
+    <li class="list-group-item">
+      <span>
+        <a hrefToDocs="operators/bufferCount" class="text-dark cursor-pointer">
+          bufferCount(5)
+        </a>
+        <small class="text-muted"> bufferCount(5) </small>
+      </span>
+      <span>{{ bufferCount() | json }}</span>
+    </li>
+    <li class="list-group-item">
+      <span>
+        <a hrefToDocs="operators/debounceTime" class="text-dark cursor-pointer">
+          debounceTime
+        </a>
+        <small class="text-muted"> debounceTime(2000) </small>
+      </span>
+      <span>{{ debounceTime() }}</span>
+    </li>
+    <li class="list-group-item">
+      <span>
+        <a hrefToDocs="operators/delay" class="text-dark cursor-pointer">
+          delay
+        </a>
+        <small class="text-muted"> delay(2000) </small>
+      </span>
+      <span>{{ delay() }}</span>
+    </li>
+    <li class="list-group-item">
+      <span>
+        <a hrefToDocs="operators/filter" class="text-dark cursor-pointer">
+          filter (even only)
+        </a>
+        <small class="text-muted"> filter((val) => Boolean(val % 2)) </small>
+      </span>
+      <span>{{ filter() }}</span>
+    </li>
+    <li class="list-group-item">
+      <span>
+        <a hrefToDocs="operators/throttleTime" class="text-dark cursor-pointer">
+          throttleTime
+        </a>
+        <small class="text-muted"> throttleTime(2000) </small>
+      </span>
+      <span>{{ throttleTime() }}</span>
+    </li>
+    <li class="list-group-item">
+      <span>
+        <a hrefToDocs="operators/map" class="text-dark cursor-pointer"> map </a>
+        <small class="text-muted"> map((val) => val + 1000) </small>
+      </span>
+      <span>{{ map() }}</span>
+    </li>
+    <li class="list-group-item">
+      <span>
+        chain (even only with 5 secs delay)
+        <small class="text-muted">
+          filter((val) => Boolean(val % 2)), delay(5000)
+        </small>
+      </span>
+      <span>{{ chain() }}</span>
+    </li>
+  </ul>
+
+  <div class="d-flex gap-4 mt-4 justify-content-end">
+    <button class="btn btn-dark" (click)="decrease()">- decrease</button>
+    <button class="btn btn-dark" (click)="increase()">+ increase</button>
+  </div>
+</div>

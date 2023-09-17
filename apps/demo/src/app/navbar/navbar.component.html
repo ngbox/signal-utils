@@ -1,0 +1,30 @@
+<nav class="navbar navbar-dark navbar-expand-sm bg-dark">
+  <div class="container">
+    <a [routerLink]="'/'" class="navbar-brand">
+      <img src="/assets/ngbox-light.png" height="40px" />
+    </a>
+
+    <div class="d-flex w-100 justify-content-start">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a
+            [routerLink]="'/operators'"
+            class="nav-link"
+            [routerLinkActive]="'text-danger'"
+          >
+            Operators
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="'/fromAsync'"
+            class="nav-link"
+            [routerLinkActive]="'text-danger'"
+          >
+            fromAsync
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

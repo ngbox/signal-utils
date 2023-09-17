@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+main {
+  flex: 1;
+  padding: 1rem 0;
+}

@@ -1,0 +1,12 @@
+.footer-link {
+  color: var(--bs-light);
+
+  &:hover {
+    color: var(--bs-danger) !important;
+  }
+}
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}

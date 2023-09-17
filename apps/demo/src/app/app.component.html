@@ -1,10 +1,11 @@
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <app-todos />
-    </div>
-    <div class="col">
-      <app-operators />
-    </div>
+<header>
+  <app-navbar />
+</header>
+<main>
+  <div class="container">
+    <router-outlet />
   </div>
+</main>
+<div>
+  <app-footer />
 </div>

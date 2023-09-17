@@ -1,0 +1,59 @@
+<div class="">
+  <div class="d-flex justify-content-between py-4">
+    <h1>fromAsync Todo Example</h1>
+    <div class="d-flex align-items-center">
+      <button
+        [disabled]="query.loading()"
+        class="btn btn-danger"
+        (click)="refresh()"
+      >
+        <span
+          class="spinner-border spinner-border-sm"
+          role="status"
+          *ngIf="query.loading()"
+          aria-hidden="true"
+        ></span>
+        refresh
+      </button>
+    </div>
+  </div>
+
+  <p>
+    <a
+      href="https://ngbox.github.io/signal-utils/signal-creators/from-async"
+      target="_blank"
+      class="text-decoration-none text-danger"
+    >
+      <code>fromAsync</code>
+    </a>
+    is a utility function designed to simplify asynchronous data handling when
+    working with Angular signals using observables. It takes an observable as
+    input and returns an object containing signals for loading, data, and error
+    states along with a "refresh" function.
+  </p>
+
+  <div class="position-relative">
+    <ul
+      class="list-group"
+      *ngIf="!query.error(); else errorTemplate"
+      [ngClass]="{ 'container-loading': query.loading() }"
+    >
+      <li
+        *ngFor="let item of query.data()"
+        (click)="toggleCompleted(item.id)"
+        class="list-group-item"
+        [class.text-decoration-line-through]="!item.completed"
+      >
+        {{ item.title }}
+      </li>
+    </ul>
+    <ng-template #errorTemplate>
+      {{ query.error() | json }}
+    </ng-template>
+    <div
+      class="spinner-border spinner"
+      role="status"
+      *ngIf="query.loading()"
+    ></div>
+  </div>
+</div>
