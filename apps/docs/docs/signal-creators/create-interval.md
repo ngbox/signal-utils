@@ -59,9 +59,17 @@ createInterval(period = 0, initialValue = 0, options: SignalIntervalOptions = {}
 ### Buffered stock price history
 
 ```ts
-heartbeat = interval(5000); // Create an interval signal that emits a "heartbeat" every 5000 milliseconds.
+const { interval, resetInterval } = createInterval(0, 2500);
+
+// Access the current value of the interval
+const currentValue = interval();
+console.log('Value:', interval());
+
 effect(() => {
-  const beat = heartbeat();
-  // Perform health checks
+  const value = interval();
+  // do something...
 });
+
+// Restart the interval
+resetInterval();
 ```
