@@ -15,7 +15,11 @@
         "main": "apps/demo/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/demo/tsconfig.app.json",
-        "assets": ["apps/demo/src/favicon.ico", "apps/demo/src/assets"],
+        "assets": [
+          "apps/demo/src/favicon.ico",
+          "apps/demo/src/assets",
+          "apps/demo/src/_redirects"
+        ],
         "styles": ["apps/demo/src/styles.scss"],
         "scripts": []
       },
