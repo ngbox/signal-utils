@@ -6,7 +6,8 @@ name: Github Pages - Docs
 on:
   push:
     branches: ['main']
-    paths: ['apps/docs/**']
+    paths:
+      - 'apps/docs/**'
 
 jobs:
   build:
