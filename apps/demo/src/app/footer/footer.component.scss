@@ -1,5 +1,9 @@
+.text-link {
+  color: rgba(255, 255, 255, 0.55);
+}
+
 .footer-link {
-  color: var(--bs-light);
+  @extend .text-link;
 
   &:hover {
     color: var(--bs-danger) !important;
