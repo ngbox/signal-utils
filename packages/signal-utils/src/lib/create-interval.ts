@@ -7,17 +7,22 @@ import {
   signal,
 } from '@angular/core';
 
-type Interval = ReturnType<typeof setInterval>;
+type IntervalRef = ReturnType<typeof setInterval>;
 
-export function interval(
+export interface CreateIntervalResponse {
+  interval: Signal<number>;
+  resetInterval: () => void;
+}
+
+export function createInterval(
   period = 0,
   initialValue = 0,
   options: SignalIntervalOptions = {}
-): Signal<number> {
-  options.injector ?? assertInInjectionContext(interval);
+): CreateIntervalResponse {
+  options.injector ?? assertInInjectionContext(createInterval);
 
   const source = signal<number>(initialValue, options);
-  let intervalRef: Interval;
+  let intervalRef: IntervalRef;
 
   if (period <= 0) {
     period = 1;
@@ -27,7 +32,7 @@ export function interval(
     clearInterval(intervalRef);
 
     intervalRef = setInterval(() => {
-      source.update((val) => (val ?? 0) + period);
+      source.update((val) => val + period);
     }, period);
 
     return () => clearInterval(intervalRef);
@@ -40,7 +45,14 @@ export function interval(
     manualCleanup: true,
   });
 
-  return source.asReadonly();
+  return {
+    interval: source.asReadonly(),
+    resetInterval(): void {
+      clear();
+      source.set(initialValue);
+      startInterval();
+    },
+  };
 }
 
 export type SignalIntervalOptions = CreateSignalOptions<number> &
