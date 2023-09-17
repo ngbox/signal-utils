@@ -2,13 +2,14 @@ import { Component, effect, inject } from '@angular/core';
 import { Todo, TodoService } from './todo.service';
 import { JsonPipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { fromAsync } from '@ngbox/signal-utils';
+import { HrefToDocsDirective } from '../../directives/to-docs.directive';
 
 @Component({
   selector: 'app-todos',
   templateUrl: './todos.component.html',
   styleUrls: ['./todos.component.scss'],
   standalone: true,
-  imports: [NgFor, NgIf, JsonPipe, NgClass],
+  imports: [NgFor, NgIf, JsonPipe, NgClass, HrefToDocsDirective],
 })
 export default class TodosComponent {
   private obs$ = inject(TodoService).getTodos();
