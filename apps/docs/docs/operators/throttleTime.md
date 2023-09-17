@@ -4,7 +4,7 @@ sidebar_position: 6
 
 # throttleTime
 
-<code>throttleTime</code> operator limits the emission of values from the source signal based on a time window. It emits the first value in the window and then ignores subsequent values until the window expires
+<code>throttleTime</code> operator limits the emission of values from the source signal based on a time window. It emits the first value in the window and then ignores subsequent values until the window expires.
 <br/><br/>
 
 ```ts
