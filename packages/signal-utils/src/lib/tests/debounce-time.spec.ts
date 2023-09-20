@@ -16,8 +16,8 @@ import {
   flush,
   tick,
 } from '@angular/core/testing';
-import { debounceTime } from './debounce-time';
-import { pipeSignal } from './pipe-signal';
+import { debounceTime } from '../debounce-time';
+import { pipeSignal } from '../pipe-signal';
 
 @Component({
   standalone: true,

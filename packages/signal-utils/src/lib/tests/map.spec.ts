@@ -6,8 +6,8 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { pipeSignal } from './pipe-signal';
-import { map } from './map';
+import { pipeSignal } from '../pipe-signal';
+import { map } from '../map';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 describe('map', () => {
