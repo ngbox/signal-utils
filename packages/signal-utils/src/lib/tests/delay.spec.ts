@@ -6,8 +6,8 @@ import {
   flush,
   tick,
 } from '@angular/core/testing';
-import { pipeSignal } from './pipe-signal';
-import { delay } from './delay';
+import { pipeSignal } from '../pipe-signal';
+import { delay } from '../delay';
 
 describe('delay', () => {
   it('emit initial value instantly', () => {

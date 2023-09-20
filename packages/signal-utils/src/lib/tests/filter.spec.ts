@@ -6,8 +6,8 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { pipeSignal } from './pipe-signal';
-import { filter } from './filter';
+import { pipeSignal } from '../pipe-signal';
+import { filter } from '../filter';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 describe('filter', () => {

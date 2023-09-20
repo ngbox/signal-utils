@@ -13,7 +13,7 @@ import {
   fakeAsync,
   tick,
 } from '@angular/core/testing';
-import { CreateIntervalResponse, createInterval } from './create-interval';
+import { CreateIntervalResponse, createInterval } from '../create-interval';
 
 @Component({
   standalone: true,

@@ -10,8 +10,8 @@ import {
   signal,
 } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { pipeSignal } from './pipe-signal';
-import { bufferCount } from './buffer-count';
+import { pipeSignal } from '../pipe-signal';
+import { bufferCount } from '../buffer-count';
 
 @Component({
   standalone: true,
