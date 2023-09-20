@@ -18,7 +18,11 @@ describe('filter', () => {
         source,
         filter(() => true)
       );
-      expect(filtered()).toBe(0);
+
+      const expected = 0;
+      const actual = filtered();
+
+      expect(actual).toBe(expected);
     });
   });
 
@@ -29,7 +33,11 @@ describe('filter', () => {
         source,
         filter(() => false)
       );
-      expect(filtered()).toBe(undefined);
+
+      const actual = filtered();
+      const expected = undefined;
+
+      expect(actual).toBe(expected);
     });
   });
 
@@ -53,22 +61,19 @@ describe('filter', () => {
       component = fixture.componentInstance;
     });
 
-    it('emit only even values', () => {
-      component.source.set(0);
-      fixture.detectChanges();
-      expect(fixture.nativeElement.textContent).toBe('');
+    test.each([
+      [[1, 2], 1],
+      [[1, 2, 3], 3],
+      [[1, 2, 3, 4, 5], 5],
+    ])('emit only even values', (values, expected) => {
+      values.forEach((val) => {
+        component.source.set(val);
+        fixture.detectChanges();
+      });
 
-      component.source.set(1);
-      fixture.detectChanges();
-      expect(fixture.nativeElement.textContent).toBe('1');
+      const actual = fixture.nativeElement.textContent;
 
-      component.source.set(2);
-      fixture.detectChanges();
-      expect(fixture.nativeElement.textContent).toBe('1');
-
-      component.source.set(3);
-      fixture.detectChanges();
-      expect(fixture.nativeElement.textContent).toBe('3');
+      expect(actual).toBe(expected.toString());
     });
   });
 
@@ -98,11 +103,13 @@ describe('filter', () => {
     });
 
     it('update mapped value when source is updated', () => {
-      fixture.detectChanges();
-      expect(fixture.nativeElement.textContent).toBe('');
       component.source.set(5);
       fixture.detectChanges();
-      expect(fixture.nativeElement.textContent).toBe('5');
+
+      const actual = fixture.nativeElement.textContent;
+      const expected = '5';
+
+      expect(actual).toBe(expected);
     });
   });
 });

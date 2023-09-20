@@ -18,7 +18,11 @@ describe('map', () => {
         source,
         map((val) => val + 1)
       );
-      expect(mapped()).toBe(1);
+
+      const expected = 1;
+      const actual = mapped();
+
+      expect(actual).toBe(expected);
     });
   });
 
@@ -45,7 +49,11 @@ describe('map', () => {
     it('update mapped value when source is updated', () => {
       component.source.set(5);
       fixture.detectChanges();
-      expect(fixture.nativeElement.textContent).toBe('10');
+
+      const actual = fixture.nativeElement.textContent;
+      const expected = '10';
+
+      expect(actual).toBe(expected);
     });
   });
 
@@ -55,11 +63,15 @@ describe('map', () => {
       injector = inject(Injector);
     });
     const source = signal<number>(5);
-    const delayed = pipeSignal(
+    const mapped = pipeSignal(
       source,
       map((x) => x * 4, { injector })
     );
-    expect(delayed()).toBe(20);
+
+    const actual = mapped();
+    const expected = 20;
+
+    expect(actual).toBe(expected);
   });
 
   describe('work with async updates', () => {
@@ -90,7 +102,11 @@ describe('map', () => {
     it('update mapped value when source is updated', () => {
       component.source.set(5);
       fixture.detectChanges();
-      expect(fixture.nativeElement.textContent).toBe('20');
+
+      const actual = fixture.nativeElement.textContent;
+      const expected = '20';
+
+      expect(actual).toBe(expected);
     });
   });
 });
