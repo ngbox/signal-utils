@@ -3,6 +3,7 @@ import {
   ComponentFixture,
   TestBed,
   fakeAsync,
+  flush,
   tick,
 } from '@angular/core/testing';
 import { pipeSignal } from './pipe-signal';
@@ -13,7 +14,11 @@ describe('delay', () => {
     TestBed.runInInjectionContext(() => {
       const source = signal<number>(5);
       const delayed = pipeSignal(source, delay(5000));
-      expect(delayed()).toBe(5);
+
+      const expected = 5;
+      const actual = delayed();
+
+      expect(actual).toBe(expected);
     });
   });
 
@@ -24,7 +29,11 @@ describe('delay', () => {
     });
     const source = signal<number>(5);
     const delayed = pipeSignal(source, delay(5000, { injector }));
-    expect(delayed()).toBe(5);
+
+    const expected = 5;
+    const actual = delayed();
+
+    expect(expected).toBe(actual);
   });
 
   describe('work with async updates', () => {
@@ -44,15 +53,29 @@ describe('delay', () => {
       component = fixture.componentInstance;
     });
 
+    it('not emit values until the given period of time', fakeAsync(() => {
+      component.source.set(10);
+      fixture.detectChanges();
+
+      const expected = '0';
+      const actual = fixture.nativeElement.textContent;
+
+      expect(expected).toBe(actual);
+      flush();
+    }));
+
     it('emit values after the given period of time', fakeAsync(() => {
       component.source.set(10);
       fixture.detectChanges();
-      expect(fixture.nativeElement.textContent).toBe('0');
 
       tick(2000);
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.textContent).toBe('10');
+      const expected = '10';
+      const actual = fixture.nativeElement.textContent;
+
+      expect(expected).toBe(actual);
+      flush();
     }));
   });
 });

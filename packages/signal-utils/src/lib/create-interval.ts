@@ -32,7 +32,7 @@ export function createInterval(
     clearInterval(intervalRef);
 
     intervalRef = setInterval(() => {
-      source.update((val) => val + period);
+      source.update((val) => val + 1);
     }, period);
 
     return () => clearInterval(intervalRef);
