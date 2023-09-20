@@ -28,7 +28,8 @@ export interface FromAsyncResponse<T, K> {
   refresh: () => void;
 }
 
-export function fromAsync<T, K>(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function fromAsync<T, K = any>(
   observable$: Observable<T>,
   options: FromAsyncOptions<T>
 ): FromAsyncResponse<T, K> {
