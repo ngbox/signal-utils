@@ -6,12 +6,13 @@
   "scripts": {
     "ng": "nx",
     "nx": "nx",
-    "lint": "nx affected:lint --fix",
-    "preinstall": "npx only-allow pnpm"
+    "start:demo": "nx serve demo",
+    "start:docs": "nx serve docs",
+    "lint": "nx affected:lint --fix"
   },
   "engines": {
     "node": ">=18",
-    "pnpm": ">=8"
+    "npm": ">=9"
   },
   "dependencies": {
     "@angular/animations": "~16.2.0",
