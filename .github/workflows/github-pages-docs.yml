@@ -5,7 +5,7 @@ name: Github Pages - Docs
 
 on:
   push:
-    branches: ['chore/migrate-form-pnpm-to-npm']
+    branches: ['main']
     paths:
       - 'apps/docs/**'
 
