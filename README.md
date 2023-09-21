@@ -4,6 +4,9 @@ The utility library for Angular Signals API
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://raw.githubusercontent.com/ngbox/signal-utils/main/LICENSE)
 [![MIT License](https://img.shields.io/badge/tested_with-jest-red)](https://jestjs.io/)
+[![All Contributors](https://img.shields.io/github/all-contributors/ngbox/signal-utils?color=ee8449&style=flat-square)](#contributors)
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c6c7d8eb-16a6-4f7c-baa7-e9d66eb93527/deploy-status)](https://app.netlify.com/sites/signal-utils/deploys)
 
 ## :closed_book: Docs
 
@@ -31,5 +34,3 @@ The utility library for Angular Signals API
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
-
-[![All Contributors](https://img.shields.io/github/all-contributors/ngbox/signal-utils?color=ee8449&style=flat-square)](#contributors)
