@@ -26,11 +26,11 @@ jobs:
                 },
                 {
                     "title": "## 📕 Documentation",
-                    "labels": ["docs"]
+                    "labels": ["documentation"]
                 },
                 {
                     "title": "## 🚨 BREAKING CHANGES",
-                    "labels": ["breaking-change"]
+                    "labels": ["breaking change"]
                 }
               ]
             }
