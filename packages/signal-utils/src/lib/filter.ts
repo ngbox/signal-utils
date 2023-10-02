@@ -3,7 +3,6 @@ import {
   CreateSignalOptions,
   Signal,
   WritableSignal,
-  assertInInjectionContext,
   effect,
   signal,
 } from '@angular/core';
@@ -14,7 +13,6 @@ export function filter<T>(
   options: SignalFilterOptions<T | undefined> = {}
 ): SignalOperatorFunction<T, T | undefined> {
   return (source: Signal<T>): Signal<T | undefined> => {
-    options.injector ?? assertInInjectionContext(filter);
     const value = predicate(source()) ? source() : undefined;
     const filteredSignal: WritableSignal<T | undefined> = signal(
       value,
@@ -34,4 +32,4 @@ export function filter<T>(
 }
 
 export type SignalFilterOptions<T> = CreateSignalOptions<T> &
-  Omit<CreateEffectOptions, 'allowSignalWrites'>;
+  Omit<CreateEffectOptions, 'allowSignalWrites' | 'injector'>;

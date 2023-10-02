@@ -3,7 +3,6 @@ import {
   CreateSignalOptions,
   Signal,
   WritableSignal,
-  assertInInjectionContext,
   effect,
   signal,
 } from '@angular/core';
@@ -14,8 +13,6 @@ export function map<T, K>(
   options: SignalMapOptions<K> = {}
 ): SignalOperatorFunction<T, K> {
   return (source: Signal<T>): Signal<K> => {
-    options.injector ?? assertInInjectionContext(map);
-
     const mapped: WritableSignal<K> = signal(mapFn(source()), options);
 
     effect(
@@ -31,4 +28,4 @@ export function map<T, K>(
 }
 
 export type SignalMapOptions<T> = CreateSignalOptions<T> &
-  Omit<CreateEffectOptions, 'allowSignalWrites'>;
+  Omit<CreateEffectOptions, 'allowSignalWrites' | 'injector'>;

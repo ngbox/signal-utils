@@ -3,7 +3,6 @@ import {
   CreateSignalOptions,
   Signal,
   WritableSignal,
-  assertInInjectionContext,
   effect,
   signal,
 } from '@angular/core';
@@ -18,8 +17,6 @@ export function bufferCount<T>(
   }
 
   return (source: Signal<T>): Signal<T[]> => {
-    options.injector ?? assertInInjectionContext(bufferCount);
-
     let index = 0;
     let values: Array<T> = [];
 
@@ -61,4 +58,4 @@ export type SignalBufferCountOptions<T> = Omit<
   CreateSignalOptions<T>,
   'equal'
 > &
-  Omit<CreateEffectOptions, 'allowSignalWrites'>;
+  Omit<CreateEffectOptions, 'allowSignalWrites' | 'injector'>;
