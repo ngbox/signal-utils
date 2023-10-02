@@ -6,6 +6,7 @@
   "scripts": {
     "ng": "nx",
     "nx": "nx",
+    "test": "nx affected:test",
     "build": "nx build signal-utils",
     "postbuild": "copyfiles README.md dist/signal-utils",
     "start:demo": "nx serve demo",
