@@ -74,20 +74,4 @@ describe('bufferCount', () => {
       expect(expected).toEqual(actual);
     });
   });
-
-  it('work with given injector', () => {
-    let injector!: Injector;
-    TestBed.runInInjectionContext(() => {
-      injector = inject(Injector);
-    });
-
-    const source = signal<number>(0);
-    const signalPipe = createSignalPipe(injector);
-    const delayed = signalPipe(source, bufferCount(2, { injector }));
-
-    const expected: Array<number> = [];
-    const actual = delayed();
-
-    expect(expected).toEqual(actual);
-  });
 });

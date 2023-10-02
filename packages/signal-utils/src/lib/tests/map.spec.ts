@@ -59,25 +59,6 @@ describe('map', () => {
     });
   });
 
-  it('work with given injector', () => {
-    let injector!: Injector;
-    TestBed.runInInjectionContext(() => {
-      injector = inject(Injector);
-    });
-    const source = signal<number>(5);
-    const signalPipe = createSignalPipe(injector);
-
-    const mapped = signalPipe(
-      source,
-      map((x) => x * 4, { injector })
-    );
-
-    const actual = mapped();
-    const expected = 20;
-
-    expect(actual).toBe(expected);
-  });
-
   describe('work with async updates', () => {
     @Component({
       standalone: true,
@@ -92,7 +73,7 @@ describe('map', () => {
         const signalPipe = createSignalPipe(this.injector);
         this.mapped = signalPipe(
           this.source,
-          map((x) => x * 4, { injector: this.injector })
+          map((x) => x * 4)
         );
       }
     }

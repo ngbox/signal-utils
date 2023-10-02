@@ -99,23 +99,4 @@ describe('debounceTime', () => {
     expect(actual).toBe(expected);
     flush();
   }));
-
-  it('work with given injector', (done) => {
-    let injector!: Injector;
-    let source!: WritableSignal<number>;
-    TestBed.runInInjectionContext(() => {
-      injector = inject(Injector);
-      source = signal(10);
-    });
-    const signalPipe = createSignalPipe(injector);
-
-    const target = signalPipe(source, debounceTime(1000, { injector }));
-
-    const actual = target();
-    const expected = 10;
-
-    expect(actual).toBe(expected);
-
-    done();
-  });
 });

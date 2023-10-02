@@ -1,4 +1,4 @@
-import { Component, Injector, inject, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import {
   ComponentFixture,
   TestBed,
@@ -21,21 +21,6 @@ describe('delay', () => {
 
       expect(actual).toBe(expected);
     });
-  });
-
-  it('work with given injector', () => {
-    let injector!: Injector;
-    TestBed.runInInjectionContext(() => {
-      injector = inject(Injector);
-    });
-    const signalPipe = createSignalPipe(injector);
-    const source = signal<number>(5);
-    const delayed = signalPipe(source, delay(5000, { injector }));
-
-    const expected = 5;
-    const actual = delayed();
-
-    expect(expected).toBe(actual);
   });
 
   describe('work with async updates', () => {
