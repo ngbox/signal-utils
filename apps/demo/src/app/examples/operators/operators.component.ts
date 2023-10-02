@@ -4,13 +4,13 @@ import {
   bufferCount,
   debounceTime,
   delay,
-  pipeSignal,
   filter,
   map,
   throttleTime,
 } from '@ngbox/signal-utils';
 import { injectDocsURL } from '../../providers';
 import { HrefToDocsDirective } from '../../directives/to-docs.directive';
+import { createSignalPipe } from '@ngbox/signal-utils';
 
 @Component({
   standalone: true,
@@ -21,21 +21,22 @@ import { HrefToDocsDirective } from '../../directives/to-docs.directive';
 })
 export default class OperatorsComponent {
   readonly docsURL = injectDocsURL();
+  private readonly signalPipe = createSignalPipe();
 
   public source = signal(0);
-  public bufferCount = pipeSignal(this.source, bufferCount(5));
-  public debounceTime = pipeSignal(this.source, debounceTime(2000));
-  public delay = pipeSignal(this.source, delay(2000));
-  public throttleTime = pipeSignal(this.source, throttleTime(2000));
-  public map = pipeSignal(
+  public bufferCount = this.signalPipe(this.source, bufferCount(5));
+  public debounceTime = this.signalPipe(this.source, debounceTime(2000));
+  public delay = this.signalPipe(this.source, delay(2000));
+  public throttleTime = this.signalPipe(this.source, throttleTime(2000));
+  public map = this.signalPipe(
     this.source,
     map((val) => val + 1000)
   );
-  public filter = pipeSignal(
+  public filter = this.signalPipe(
     this.source,
     filter((val) => Boolean(val % 2))
   );
-  public chain = pipeSignal(
+  public chain = this.signalPipe(
     this.source,
     filter((val) => Boolean(val % 2)),
     delay(5000)
