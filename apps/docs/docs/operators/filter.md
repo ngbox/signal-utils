@@ -41,6 +41,7 @@ filter<T>(filterFn: (value: T) => boolean, options: SignalFilterOptions<T> = {})
 ### Handle the filtered user activities
 
 ```ts
+const signalPipe = createSignalPipe();
 userActivity = signal(0);
-filteredActivity = pipeSignal(userActivity, filter((activity) => activity !== 'Inactive');
+filteredActivity = signalPipe(userActivity, filter((activity) => activity !== 'Inactive');
 ```

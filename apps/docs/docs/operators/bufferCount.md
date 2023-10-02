@@ -41,8 +41,9 @@ bufferCount<T>(bufferSize: number, options: SignalBufferCountOptions<T> = {}): T
 ### Buffered stock price history
 
 ```ts
+const signalPipe = createSignalPipe();
 stockPrice: Signal<number> = signal(10);
-bufferedStockPriceHistory: Signal<number[]> = pipeSignal(
+bufferedStockPriceHistory: Signal<number[]> = signalPipe(
   source,
   bufferCount(3)
 ); // Analyze or visualize the buffered stock price history
