@@ -112,5 +112,6 @@ function signalPipe<T>(
 export function createSignalPipe(_injector?: Injector): typeof signalPipe {
   _injector ?? assertInInjectionContext(createSignalPipe);
   const injector = _injector ?? inject(Injector);
-  return runInInjectionContext(injector, () => signalPipe);
+  return <T>(...params: Parameters<typeof signalPipe<T, unknown>>) =>
+    runInInjectionContext(injector, () => signalPipe(...params));
 }
