@@ -6,7 +6,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { pipeSignal } from '../pipe-signal';
+import { createSignalPipe } from '../pipe-signal';
 import { map } from '../map';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -14,7 +14,8 @@ describe('map', () => {
   it('set initial value of source to the new signal', () => {
     TestBed.runInInjectionContext(() => {
       const source = signal<number>(0);
-      const mapped = pipeSignal(
+      const signalPipe = createSignalPipe();
+      const mapped = signalPipe(
         source,
         map((val) => val + 1)
       );
@@ -33,7 +34,8 @@ describe('map', () => {
     })
     class HostComponent {
       readonly source = signal(0);
-      readonly mapped = pipeSignal(
+      readonly signalPipe = createSignalPipe();
+      readonly mapped = this.signalPipe(
         this.source,
         map((x) => x * 2)
       );
@@ -63,7 +65,9 @@ describe('map', () => {
       injector = inject(Injector);
     });
     const source = signal<number>(5);
-    const mapped = pipeSignal(
+    const signalPipe = createSignalPipe(injector);
+
+    const mapped = signalPipe(
       source,
       map((x) => x * 4, { injector })
     );
@@ -85,7 +89,8 @@ describe('map', () => {
       mapped!: Signal<number>;
 
       ngOnInit(): void {
-        this.mapped = pipeSignal(
+        const signalPipe = createSignalPipe(this.injector);
+        this.mapped = signalPipe(
           this.source,
           map((x) => x * 4, { injector: this.injector })
         );

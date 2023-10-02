@@ -10,7 +10,7 @@ import {
   signal,
 } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { pipeSignal } from '../pipe-signal';
+import { createSignalPipe } from '../pipe-signal';
 import { bufferCount } from '../buffer-count';
 
 @Component({
@@ -26,8 +26,9 @@ class HostComponent implements OnInit {
 
   ngOnInit(): void {
     runInInjectionContext(this.injector, () => {
+      const signalPipe = createSignalPipe();
       this.source = signal(1);
-      this.buffered = pipeSignal(this.source, bufferCount(this.bufferSize));
+      this.buffered = signalPipe(this.source, bufferCount(this.bufferSize));
     });
   }
 }
@@ -81,7 +82,8 @@ describe('bufferCount', () => {
     });
 
     const source = signal<number>(0);
-    const delayed = pipeSignal(source, bufferCount(2, { injector }));
+    const signalPipe = createSignalPipe(injector);
+    const delayed = signalPipe(source, bufferCount(2, { injector }));
 
     const expected: Array<number> = [];
     const actual = delayed();

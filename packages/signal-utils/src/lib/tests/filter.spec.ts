@@ -6,7 +6,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { pipeSignal } from '../pipe-signal';
+import { createSignalPipe } from '../pipe-signal';
 import { filter } from '../filter';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -14,7 +14,8 @@ describe('filter', () => {
   it('emit initial value if predicate returns true', () => {
     TestBed.runInInjectionContext(() => {
       const source = signal<number>(0);
-      const filtered = pipeSignal(
+      const signalPipe = createSignalPipe();
+      const filtered = signalPipe(
         source,
         filter(() => true)
       );
@@ -29,7 +30,8 @@ describe('filter', () => {
   it('be undefined if predicate returns false', () => {
     TestBed.runInInjectionContext(() => {
       const source = signal<number>(0);
-      const filtered = pipeSignal(
+      const signalPipe = createSignalPipe();
+      const filtered = signalPipe(
         source,
         filter(() => false)
       );
@@ -48,7 +50,8 @@ describe('filter', () => {
     })
     class HostComponent {
       readonly source = signal(0);
-      readonly filtered = pipeSignal(
+      readonly signalPipe = createSignalPipe();
+      readonly filtered = this.signalPipe(
         this.source,
         filter((x) => Boolean(x % 2))
       );
@@ -88,9 +91,10 @@ describe('filter', () => {
       filtered!: Signal<number | undefined>;
 
       ngOnInit(): void {
-        this.filtered = pipeSignal(
+        const signalPipe = createSignalPipe(this.injector);
+        this.filtered = signalPipe(
           this.source,
-          filter((x) => x > 2, { injector: this.injector })
+          filter((x) => x > 2)
         );
       }
     }
