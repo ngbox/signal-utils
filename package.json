@@ -8,7 +8,7 @@
     "nx": "nx",
     "test": "nx test signal-utils",
     "build": "nx build signal-utils",
-    "postbuild": "copyfiles README.md dist/signal-utils",
+    "postbuild": "copyfiles README.md dist/packages/signal-utils",
     "start:demo": "nx serve demo",
     "start:docs": "nx serve docs",
     "lint": "nx affected:lint --fix"
