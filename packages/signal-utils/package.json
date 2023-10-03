@@ -1,6 +1,6 @@
 {
   "name": "@ngbox/signal-utils",
-  "version": "0.0.1",
+  "version": "0.0.1-beta.0",
   "description": "Powerful library to interact with Angular Signals API",
   "license": "MIT",
   "sideEffects": false,
