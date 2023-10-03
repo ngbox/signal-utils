@@ -3,7 +3,6 @@ import {
   CreateSignalOptions,
   Signal,
   WritableSignal,
-  assertInInjectionContext,
   effect,
   signal,
 } from '@angular/core';
@@ -14,7 +13,6 @@ export function delay<T>(
   options: SignalDelayOptions<T> = {}
 ): SignalOperatorFunction<T, T> {
   return (source: Signal<T>): Signal<T> => {
-    options.injector ?? assertInInjectionContext(delay);
     const delayedSignal: WritableSignal<T> = signal(source(), options);
 
     effect(
@@ -30,4 +28,4 @@ export function delay<T>(
 }
 
 export type SignalDelayOptions<T> = CreateSignalOptions<T> &
-  Omit<CreateEffectOptions, 'allowSignalWrites'>;
+  Omit<CreateEffectOptions, 'allowSignalWrites' | 'injector'>;

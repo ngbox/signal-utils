@@ -3,7 +3,6 @@ import {
   CreateSignalOptions,
   Signal,
   WritableSignal,
-  assertInInjectionContext,
   effect,
   signal,
 } from '@angular/core';
@@ -14,8 +13,6 @@ export function throttleTime<T>(
   options: SignalThrottleTimeOptions<T> = {}
 ): SignalOperatorFunction<T, T> {
   return (source: Signal<T>): Signal<T> => {
-    options.injector ?? assertInInjectionContext(throttleTime);
-
     const throttledSignal: WritableSignal<T> = signal(source(), options);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -55,4 +52,4 @@ export function throttleTime<T>(
 }
 
 export type SignalThrottleTimeOptions<T> = CreateSignalOptions<T> &
-  Omit<CreateEffectOptions, 'allowSignalWrites'>;
+  Omit<CreateEffectOptions, 'allowSignalWrites' | 'injector'>;

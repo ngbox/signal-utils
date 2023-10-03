@@ -17,7 +17,7 @@ import {
   tick,
 } from '@angular/core/testing';
 import { debounceTime } from '../debounce-time';
-import { pipeSignal } from '../pipe-signal';
+import { createSignalPipe } from '../pipe-signal';
 
 @Component({
   standalone: true,
@@ -32,7 +32,8 @@ class HostComponent<T = unknown> implements OnInit {
 
   ngOnInit(): void {
     runInInjectionContext(this.injector, () => {
-      this.debounced = pipeSignal(this.source, debounceTime(...this.params));
+      const signalPipe = createSignalPipe();
+      this.debounced = signalPipe(this.source, debounceTime(...this.params));
     });
   }
 }
@@ -98,22 +99,4 @@ describe('debounceTime', () => {
     expect(actual).toBe(expected);
     flush();
   }));
-
-  it('work with given injector', (done) => {
-    let injector!: Injector;
-    let source!: WritableSignal<number>;
-    TestBed.runInInjectionContext(() => {
-      injector = inject(Injector);
-      source = signal(10);
-    });
-
-    const target = pipeSignal(source, debounceTime(1000, { injector }));
-
-    const actual = target();
-    const expected = 10;
-
-    expect(actual).toBe(expected);
-
-    done();
-  });
 });

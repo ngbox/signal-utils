@@ -1,12 +1,5 @@
-import {
-  Component,
-  Injector,
-  OnInit,
-  Signal,
-  inject,
-  signal,
-} from '@angular/core';
-import { pipeSignal } from '../pipe-signal';
+import { Component, signal } from '@angular/core';
+import { createSignalPipe } from '../pipe-signal';
 import { filter } from '../filter';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -14,7 +7,8 @@ describe('filter', () => {
   it('emit initial value if predicate returns true', () => {
     TestBed.runInInjectionContext(() => {
       const source = signal<number>(0);
-      const filtered = pipeSignal(
+      const signalPipe = createSignalPipe();
+      const filtered = signalPipe(
         source,
         filter(() => true)
       );
@@ -29,7 +23,8 @@ describe('filter', () => {
   it('be undefined if predicate returns false', () => {
     TestBed.runInInjectionContext(() => {
       const source = signal<number>(0);
-      const filtered = pipeSignal(
+      const signalPipe = createSignalPipe();
+      const filtered = signalPipe(
         source,
         filter(() => false)
       );
@@ -48,7 +43,8 @@ describe('filter', () => {
     })
     class HostComponent {
       readonly source = signal(0);
-      readonly filtered = pipeSignal(
+      readonly signalPipe = createSignalPipe();
+      readonly filtered = this.signalPipe(
         this.source,
         filter((x) => Boolean(x % 2))
       );
@@ -74,42 +70,6 @@ describe('filter', () => {
       const actual = fixture.nativeElement.textContent;
 
       expect(actual).toBe(expected.toString());
-    });
-  });
-
-  describe('work with the given injector', () => {
-    @Component({
-      standalone: true,
-      template: '{{filtered()}}',
-    })
-    class HostComponent implements OnInit {
-      readonly source = signal(0);
-      readonly injector = inject(Injector);
-      filtered!: Signal<number | undefined>;
-
-      ngOnInit(): void {
-        this.filtered = pipeSignal(
-          this.source,
-          filter((x) => x > 2, { injector: this.injector })
-        );
-      }
-    }
-    let component: HostComponent;
-    let fixture: ComponentFixture<HostComponent>;
-
-    beforeEach(() => {
-      fixture = TestBed.createComponent(HostComponent);
-      component = fixture.componentInstance;
-    });
-
-    it('update mapped value when source is updated', () => {
-      component.source.set(5);
-      fixture.detectChanges();
-
-      const actual = fixture.nativeElement.textContent;
-      const expected = '5';
-
-      expect(actual).toBe(expected);
     });
   });
 });

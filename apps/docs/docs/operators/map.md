@@ -41,8 +41,9 @@ map<T, K>(mapFn: (value: T) => K, options: SignalMapOptions<K> = {}): K
 ### Calculate the square of the source
 
 ```ts
+const signalPipe = createSignalPipe();
 source = signal(10);
-square = pipeSignal(source, map(val) => val * val); // 100
+square = signalPipe(source, map(val) => val * val); // 100
 ```
 
 :::info

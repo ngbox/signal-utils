@@ -41,8 +41,9 @@ throttleTime<T>(throttleDuration: number, options: SignalThrottleTimeOptions<T> 
 ### Throttle click emissions
 
 ```ts
+const signalPipe = createSignalPipe();
 clickCount = signal(0);
-throttledClickCount: Signal<number> = pipeSignal(
+throttledClickCount: Signal<number> = signalPipe(
   clickCount,
   throttleTime(1000)
 ); // to every 1000 milliseconds

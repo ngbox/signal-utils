@@ -1,4 +1,4 @@
-import { Component, Injector, inject, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import {
   ComponentFixture,
   TestBed,
@@ -6,34 +6,21 @@ import {
   flush,
   tick,
 } from '@angular/core/testing';
-import { pipeSignal } from '../pipe-signal';
+import { createSignalPipe } from '../pipe-signal';
 import { delay } from '../delay';
 
 describe('delay', () => {
   it('emit initial value instantly', () => {
     TestBed.runInInjectionContext(() => {
       const source = signal<number>(5);
-      const delayed = pipeSignal(source, delay(5000));
+      const signalPipe = createSignalPipe();
+      const delayed = signalPipe(source, delay(5000));
 
       const expected = 5;
       const actual = delayed();
 
       expect(actual).toBe(expected);
     });
-  });
-
-  it('work with given injector', () => {
-    let injector!: Injector;
-    TestBed.runInInjectionContext(() => {
-      injector = inject(Injector);
-    });
-    const source = signal<number>(5);
-    const delayed = pipeSignal(source, delay(5000, { injector }));
-
-    const expected = 5;
-    const actual = delayed();
-
-    expect(expected).toBe(actual);
   });
 
   describe('work with async updates', () => {
@@ -43,7 +30,8 @@ describe('delay', () => {
     })
     class HostComponent {
       readonly source = signal(0);
-      readonly delayed = pipeSignal(this.source, delay(2000));
+      readonly signalPipe = createSignalPipe();
+      readonly delayed = this.signalPipe(this.source, delay(2000));
     }
     let component: HostComponent;
     let fixture: ComponentFixture<HostComponent>;

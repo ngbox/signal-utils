@@ -25,8 +25,9 @@ To start using Your Signal Library in your Angular project, follow these steps:
 Signal Utils provides operators that allow you to transform, filter, debounce, and more, just like in RxJS. Here's an example using the <code>filter</code> operator.
 
 ```ts
+const signalPipe = createSignalPipe();
 userActivity = signal(0);
-filteredActivity = pipeSignal(userActivity, filter((activity) => activity !== 'Inactive');
+filteredActivity = signalPipe(userActivity, filter((activity) => activity !== 'Inactive');
 ```
 
 ## Additional Resources

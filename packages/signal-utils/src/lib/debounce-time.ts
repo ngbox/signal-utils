@@ -3,7 +3,6 @@ import {
   CreateSignalOptions,
   Signal,
   WritableSignal,
-  assertInInjectionContext,
   effect,
   signal,
 } from '@angular/core';
@@ -14,7 +13,6 @@ export function debounceTime<T>(
   options: SignalDebounceTimeOptions<T> = {}
 ): SignalOperatorFunction<T, T> {
   return (source: Signal<T>): Signal<T> => {
-    options.injector ?? assertInInjectionContext(debounceTime);
     const debouncedSignal: WritableSignal<T> = signal(source(), options);
 
     effect(
@@ -36,4 +34,4 @@ export function debounceTime<T>(
 }
 
 export type SignalDebounceTimeOptions<T> = CreateSignalOptions<T> &
-  Omit<CreateEffectOptions, 'allowSignalWrites' | 'manualCleanup'>;
+  Omit<CreateEffectOptions, 'allowSignalWrites' | 'manualCleanup' | 'injector'>;
