@@ -8,7 +8,7 @@ sidebar_position: 6
 <br/><br/>
 
 ```ts
-filter<T>(filterFn: (value: T) => boolean, options: SignalFilterOptions<T> = {}): T
+filter<T>(filterFn: (value: T) => boolean, options: SignalFilterOptions<T> = {}): T | undefined
 ```
 
 ## Parameters
@@ -38,10 +38,42 @@ filter<T>(filterFn: (value: T) => boolean, options: SignalFilterOptions<T> = {})
 
 ## Example
 
-### Handle the filtered user activities
+### Even Numbers
 
 ```ts
-const signalPipe = createSignalPipe();
-userActivity = signal(0);
-filteredActivity = signalPipe(userActivity, filter((activity) => activity !== 'Inactive');
+@Component({
+  template: `
+    <p>Interval: {{ intervalRef.interval() }} </p>
+    <p>Is even: {{ isEven() }} </p>
+  `
+})
+export class IntervalComponent {
+  intervalRef = createInterval(0, 1000);
+  private isEven = this.signalPipe(this.intervalRef.interval(), filter((count) => count % 2 === 0);
+}
+
+```
+
+### Callback runs in the Injection Context
+
+:::success
+
+**predicate** function always runs in the injection context.
+:::
+
+```ts
+@Component({
+  template: `
+    <p>Source: {{ source() }}</p>
+    <p>Last fibonacci number: {{ onlyFibonacciNumbers() }}</p>
+  `
+})
+export class MyComponent {
+  readonly intervalRef = createInterval(0, 2500);
+
+  this.onlyFibonacciNumbers = this.signalPipe(
+                this.intervalRef.interval(),
+                filter(val) => inject(FibonacciService).isFibonacci(val)
+              );
+}
 ```

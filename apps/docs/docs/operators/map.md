@@ -41,13 +41,47 @@ map<T, K>(mapFn: (value: T) => K, options: SignalMapOptions<K> = {}): K
 ### Calculate the square of the source
 
 ```ts
-const signalPipe = createSignalPipe();
-source = signal(10);
-square = signalPipe(source, map(val) => val * val); // 100
+@Component({
+  template: `
+    <p>Source: {{ source() }}</p>
+    <p>Square: {{ square() }}</p>
+  `
+})
+export class SquareComponent {
+  readonly signalPipe = createSignalPipe();
+
+  source = signal(10);
+  square = signalPipe(this.source, map(val) => val * val); // 100
+}
 ```
 
-:::info
+### Callback runs in the Injection Context
 
-**map** doesn't track the changes of any signals used in the given callback function.
+:::success
 
+**mapFn** always runs in the injection context.
+:::
+
+```ts
+@Component({
+  template: `
+    <p>Source: {{ source() }}</p>
+    <p>Square: {{ square() }}</p>
+  `
+})
+export class SquareComponent {
+  readonly signalPipe = createSignalPipe();
+
+  source = signal(10);
+  square!: Signal<number>;
+
+  ngOnInit() {
+    this.square = this.signalPipe(this.source, map(val) => inject(CalculationService).calculateSquare(val));
+  }
+}
+```
+
+:::danger
+
+**map** doesn't track the changes of any signals used in the given callback function, so avoid using any other signals inside of the callback function and expecting the library to track and update.
 :::

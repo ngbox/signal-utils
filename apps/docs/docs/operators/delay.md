@@ -43,7 +43,11 @@ delay<T>(delayDuration: number, options: SignalDelayOptions<T> = {}): T
 Display the delayed progress after a 2000 millisecond delay.
 
 ```ts
-const signalPipe = createSignalPipe();
-progress = signal(0);
-delayedProgress = signalPipe(source, delay(2000));
+@Component()
+export class MyComponent {
+  readonly signalPipe = createSignalPipe();
+
+  progress = signal(0);
+  delayedProgress = signalPipe(source, delay(2000));
+}
 ```
