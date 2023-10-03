@@ -41,10 +41,19 @@ throttleTime<T>(throttleDuration: number, options: SignalThrottleTimeOptions<T> 
 ### Throttle click emissions
 
 ```ts
-const signalPipe = createSignalPipe();
-clickCount = signal(0);
-throttledClickCount: Signal<number> = signalPipe(
-  clickCount,
-  throttleTime(1000)
-); // to every 1000 milliseconds
+@Component({
+  template: `
+    <p>click count: {{ clickCount() }}</p>
+    <p>throttled click count: {{ throttledClickCount() }}</p>
+  `,
+})
+export class ThrottleTimeExampleComponent {
+  readonly signalPipe = createSignalPipe();
+
+  clickCount = signal(0);
+  throttledClickCount: Signal<number> = signalPipe(
+    this.clickCount,
+    throttleTime(1000)
+  ); // to every 1000 milliseconds
+}
 ```

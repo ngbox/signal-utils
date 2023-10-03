@@ -78,8 +78,10 @@ fromAsync<DataType, ErrorType>(observable$: Observable<T>, options: FromAsyncOpt
 ### Fetch and Mutate Todos
 
 ```ts
-private obs$: Observable<Todo[]> = inject(APIService).getTodos$();
-query = fromAsync(this.obs$, { initialValue: [] });
+private todoService = inject(TodoService)
+private obs$: Observable<Todo[]> = this.todoService.getTodos$();
+
+readonly query = fromAsync(this.obs$, { initialValue: [] });
 
 constructor() {
     effect(() => {
@@ -88,6 +90,10 @@ constructor() {
         // do something with error
         }
     });
+}
+
+saveChanges() {
+  this.todoService.saveTodos(this.query.data()).subscribe(() => this.refresh())
 }
 
 refresh() {

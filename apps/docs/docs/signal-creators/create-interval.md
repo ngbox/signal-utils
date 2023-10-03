@@ -30,6 +30,18 @@ createInterval(period = 0, initialValue = 0, options: SignalIntervalOptions = {}
         Optional. Default is <code>0</code>
       </td>
     </tr>
+    <tr>
+      <td> 
+        <code>options</code>
+      </td>
+      <td>
+        Optional.
+        The combination of
+        <a target="_blank" href="https://angular.io/api/core/CreateEffectOptions"> CreateEffectOptions </a> and 
+        <a target="_blank" href="https://angular.io/api/core/CreateSignalOptions"> CreateSignalOptions </a>
+        (excluding the <code>allowSignalWrites</code> and <code>manualCleanup</code> properties)
+      </td>
+    </tr>
   </tbody>
 </table>
 
@@ -56,20 +68,47 @@ createInterval(period = 0, initialValue = 0, options: SignalIntervalOptions = {}
 
 ## Example
 
-### Buffered stock price history
+### Basic Usage
 
 ```ts
-const { interval, resetInterval } = createInterval(0, 2500);
+ŒComponent({
+  template: 'Interval: {{ intervalRef.interval() }}'
+})
+export class TodoExampleComponent {
+  readonly intervalRef = createInterval(0, 2500);
 
-// Access the current value of the interval
-const currentValue = interval();
-console.log('Value:', interval());
+  constructor() {
+    readonly value = this.intervalRef.interval();
+    console.log('Value:', value);
 
-effect(() => {
-  const value = interval();
-  // do something...
-});
+    effect(() => {
+      const value = this.intervalRef.interval();
+      // do something when it ticks...
+    });
+  }
 
-// Restart the interval
-resetInterval();
+  reset() {
+    this.intervalRef.resetInterval();
+  }
+}
+
 ```
+
+### Usage at outside of Injection Context
+
+```ts
+@Injetable()
+export class TodoExampleComponent {
+  private readonly injector = inject(Injector);
+
+  create(): CreateIntervalResponse {
+    return createInterval(0, 2500, { injector: this.injector });
+  }
+}
+```
+
+:::tip
+
+**createInterval** automatically clears itself when the given injector instance is destroy.
+
+:::
