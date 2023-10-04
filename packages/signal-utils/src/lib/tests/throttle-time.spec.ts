@@ -17,7 +17,7 @@ import {
   tick,
 } from '@angular/core/testing';
 import { throttleTime } from '../throttle-time';
-import { createSignalPipe } from '../pipe-signal';
+import { signalPipe } from '../pipe-signal';
 
 @Component({
   standalone: true,
@@ -32,8 +32,6 @@ class HostComponent<T = unknown> implements OnInit {
 
   ngOnInit(): void {
     runInInjectionContext(this.injector, () => {
-      const signalPipe = createSignalPipe();
-
       this.throttled = signalPipe(this.source, throttleTime(...this.params));
     });
   }

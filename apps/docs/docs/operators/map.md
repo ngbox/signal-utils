@@ -48,36 +48,9 @@ map<T, K>(mapFn: (value: T) => K, options: SignalMapOptions<K> = {}): K
   `
 })
 export class SquareComponent {
-  readonly signalPipe = createSignalPipe();
 
   source = signal(10);
   square = signalPipe(this.source, map(val) => val * val); // 100
-}
-```
-
-### Callback runs in the Injection Context
-
-:::success
-
-**mapFn** always runs in the injection context.
-:::
-
-```ts
-@Component({
-  template: `
-    <p>Source: {{ source() }}</p>
-    <p>Square: {{ square() }}</p>
-  `
-})
-export class SquareComponent {
-  readonly signalPipe = createSignalPipe();
-
-  source = signal(10);
-  square!: Signal<number>;
-
-  ngOnInit() {
-    this.square = this.signalPipe(this.source, map(val) => inject(CalculationService).calculateSquare(val));
-  }
 }
 ```
 

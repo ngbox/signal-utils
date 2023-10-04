@@ -70,7 +70,6 @@ export function filterFibonacciNumbers<T, K>(
 ```
 
 ```ts
-const signalPipe = createSignalPipe();
 const source = signal(10);
-signalPipe(source, filterFibonacciNumbers(0));
+const lastFibonacci = signalPipe(source, filterFibonacciNumbers(0));
 ```

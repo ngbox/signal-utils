@@ -43,8 +43,6 @@ bufferCount<T>(bufferSize: number, options: SignalBufferCountOptions<T> = {}): T
 ```ts
 @Component()
 export class MyComponent {
-  readonly signalPipe = createSignalPipe();
-
   stockPrice: Signal<number> = signal(10);
   stockPriceHistory: Signal<number[]> = signalPipe(source, bufferCount(3)); // Analyze or visualize the buffered stock price history
 

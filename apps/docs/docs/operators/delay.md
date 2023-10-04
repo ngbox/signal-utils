@@ -45,8 +45,6 @@ Display the delayed progress after a 2000 millisecond delay.
 ```ts
 @Component()
 export class MyComponent {
-  readonly signalPipe = createSignalPipe();
-
   progress = signal(0);
   delayedProgress = signalPipe(source, delay(2000));
 }

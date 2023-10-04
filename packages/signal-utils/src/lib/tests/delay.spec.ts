@@ -6,14 +6,13 @@ import {
   flush,
   tick,
 } from '@angular/core/testing';
-import { createSignalPipe } from '../pipe-signal';
+import { signalPipe } from '../pipe-signal';
 import { delay } from '../delay';
 
 describe('delay', () => {
   it('emit initial value instantly', () => {
     TestBed.runInInjectionContext(() => {
       const source = signal<number>(5);
-      const signalPipe = createSignalPipe();
       const delayed = signalPipe(source, delay(5000));
 
       const expected = 5;
@@ -30,8 +29,7 @@ describe('delay', () => {
     })
     class HostComponent {
       readonly source = signal(0);
-      readonly signalPipe = createSignalPipe();
-      readonly delayed = this.signalPipe(this.source, delay(2000));
+      readonly delayed = signalPipe(this.source, delay(2000));
     }
     let component: HostComponent;
     let fixture: ComponentFixture<HostComponent>;

@@ -10,7 +10,7 @@ import {
   signal,
 } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { createSignalPipe } from '../pipe-signal';
+import { signalPipe } from '../pipe-signal';
 import { bufferCount } from '../buffer-count';
 
 @Component({
@@ -26,7 +26,6 @@ class HostComponent implements OnInit {
 
   ngOnInit(): void {
     runInInjectionContext(this.injector, () => {
-      const signalPipe = createSignalPipe();
       this.source = signal(1);
       this.buffered = signalPipe(this.source, bufferCount(this.bufferSize));
     });
