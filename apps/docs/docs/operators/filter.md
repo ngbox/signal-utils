@@ -8,7 +8,7 @@ sidebar_position: 6
 <br/><br/>
 
 ```ts
-filter<T>(filterFn: (value: T) => boolean, options: SignalFilterOptions<T> = {}): T | undefined
+filter<T>(filterFn: (value: T) => boolean, options: SignalFilterOptions<T> = {}): T | null
 ```
 
 ## Parameters
@@ -52,28 +52,4 @@ export class IntervalComponent {
   private isEven = this.signalPipe(this.intervalRef.interval(), filter((count) => count % 2 === 0);
 }
 
-```
-
-### Callback runs in the Injection Context
-
-:::success
-
-**predicate** function always runs in the injection context.
-:::
-
-```ts
-@Component({
-  template: `
-    <p>Source: {{ source() }}</p>
-    <p>Last fibonacci number: {{ onlyFibonacciNumbers() }}</p>
-  `
-})
-export class MyComponent {
-  readonly intervalRef = createInterval(0, 2500);
-
-  this.onlyFibonacciNumbers = this.signalPipe(
-                this.intervalRef.interval(),
-                filter(val) => inject(FibonacciService).isFibonacci(val)
-              );
-}
 ```

@@ -49,7 +49,7 @@ export class MyComponent {
   ngOnInit() {
     this.stockPrice.set(11);
     this.stockPrice.set(12);
-    console.log(this.stockPriceHistory); // [10, 11, 12]
+    console.log(this.stockPriceHistory()); // [10, 11, 12]
   }
 }
 ```

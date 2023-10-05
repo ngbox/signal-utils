@@ -16,28 +16,26 @@ type SignalOperatorFunction<InputSignalType, OutputSignalType> = (
 ```
 
 :::success
-
-**SignalOperatorFunction** always runs in the injection context.
+The function returns **SignalOperatorFunction** runs in the injection context.
 :::
 
 ## Example
 
-### map
+### map to currency
 
 ```ts
-export function map<T, K>(
-  mapFn: (value: T) => K,
-  options: SignalMapOptions<K> = {}
-): SignalOperatorFunction<T, K> {
+export function mapCurrency(): SignalOperatorFunction<number, string> {
+  const currencyService = inject(CurrencyService); // safe to make injections.
+
   return (source: Signal<T>): Signal<K> => {
-    const mapped: WritableSignal<K> = signal(mapFn(source()), options);
+    const mapped: WritableSignal<K> = signal(currencyService.mapFrom(source()));
 
     effect(
       () => {
         const sourceValue = source();
-        mapped.set(mapFn(sourceValue));
+        mapped.set(currencyService.mapFrom(sourceValue));
       },
-      { ...options, allowSignalWrites: true }
+      { allowSignalWrites: true }
     );
 
     return mapped.asReadonly();

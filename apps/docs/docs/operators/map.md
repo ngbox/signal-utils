@@ -54,7 +54,7 @@ export class SquareComponent {
 }
 ```
 
-:::danger
+:::info
 
 **map** doesn't track the changes of any signals used in the given callback function, so avoid using any other signals inside of the callback function and expecting the library to track and update.
 :::

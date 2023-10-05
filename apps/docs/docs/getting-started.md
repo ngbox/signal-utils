@@ -36,7 +36,7 @@ export class MyComponent {
 
   readonly last3FibonacciNumber = signalPipe(
     this.intervalRef.interval(),
-    filter((value) => inject(FibonacciService).isFibonacci(value)),
+    filter((value) => isFibonacci(value)),
     bufferCount(3)
   );
 }
