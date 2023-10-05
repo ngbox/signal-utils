@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestBed } from '@angular/core/testing';
-import { createSignalPipe } from '../pipe-signal';
+import { createSignalPipe, signalPipe } from '../pipe-signal';
 import { Injector, Signal, effect, inject, signal } from '@angular/core';
 import { SignalOperatorFunction } from '../types';
 
@@ -25,8 +25,6 @@ describe('createSignalPipe', () => {
 
   it('call the given operator functions', () => {
     TestBed.runInInjectionContext(() => {
-      const signalPipe = createSignalPipe();
-
       const source = signal<number>(0);
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const mapped = signalPipe(source, toString, toNumber);
@@ -38,8 +36,6 @@ describe('createSignalPipe', () => {
 
   it('call the given operator functions in the correct order', () => {
     TestBed.runInInjectionContext(() => {
-      const signalPipe = createSignalPipe();
-
       const source = signal<number>(0);
       const mapped = signalPipe(source, toString, toNumber);
 
@@ -58,6 +54,18 @@ describe('createSignalPipe', () => {
 
     const source = signal<number>(0);
     const mapped = signalPipe(source, toString, toNumber);
+
+    expect(mapped()).toEqual(0);
+    expect(toString).toBeCalledTimes(1);
+    expect(toNumber).toBeCalledTimes(1);
+  });
+
+  it('run the logic in Injection Context without createSignalPipe', () => {
+    let injector!: Injector;
+    TestBed.runInInjectionContext(() => (injector = inject(Injector)));
+
+    const source = signal<number>(0);
+    const mapped = signalPipe({ source, injector }, toString, toNumber);
 
     expect(mapped()).toEqual(0);
     expect(toString).toBeCalledTimes(1);

@@ -10,14 +10,11 @@ import { SignalOperatorFunction } from './types';
 
 export function filter<T>(
   predicate: (value: T) => boolean,
-  options: SignalFilterOptions<T | undefined> = {}
-): SignalOperatorFunction<T, T | undefined> {
-  return (source: Signal<T>): Signal<T | undefined> => {
-    const value = predicate(source()) ? source() : undefined;
-    const filteredSignal: WritableSignal<T | undefined> = signal(
-      value,
-      options
-    );
+  options: SignalFilterOptions<T | null> = {}
+): SignalOperatorFunction<T, T | null> {
+  return (source: Signal<T>): Signal<T | null> => {
+    const value = predicate(source()) ? source() : null;
+    const filteredSignal: WritableSignal<T | null> = signal(value, options);
 
     effect(
       () => {

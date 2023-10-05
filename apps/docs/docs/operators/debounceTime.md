@@ -47,8 +47,6 @@ debounceTime<T>(dueTime: number, options: SignalDebounceTimeOptions<T> = {}): T
 ```ts
 @Component()
 export class MyComponent {
-  readonly signalPipe = createSignalPipe();
-
   searchQuery: Signal<string> = signal('');
   debouncedSearchQuery: Signal<string> = signalPipe(source, debounceTime(500));
 }

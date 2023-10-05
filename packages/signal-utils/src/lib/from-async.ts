@@ -15,7 +15,7 @@ import {
   startWith,
   tap,
   switchMap,
-  throwError,
+  EMPTY,
 } from 'rxjs';
 
 export type FromAsyncOptions<T> = CreateSignalOptions<T> &
@@ -43,7 +43,7 @@ export function fromAsync<T, K = any>(
   const onError = (err: K): Observable<never> => {
     error.set(err);
     loading.set(false);
-    return throwError(() => err);
+    return EMPTY;
   };
 
   const startFetching = (): void => {

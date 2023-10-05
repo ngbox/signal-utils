@@ -48,8 +48,6 @@ throttleTime<T>(throttleDuration: number, options: SignalThrottleTimeOptions<T> 
   `,
 })
 export class ThrottleTimeExampleComponent {
-  readonly signalPipe = createSignalPipe();
-
   clickCount = signal(0);
   throttledClickCount: Signal<number> = signalPipe(
     this.clickCount,

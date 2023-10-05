@@ -6,7 +6,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { createSignalPipe } from '../pipe-signal';
+import { createSignalPipe, signalPipe } from '../pipe-signal';
 import { map } from '../map';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -14,7 +14,6 @@ describe('map', () => {
   it('set initial value of source to the new signal', () => {
     TestBed.runInInjectionContext(() => {
       const source = signal<number>(0);
-      const signalPipe = createSignalPipe();
       const mapped = signalPipe(
         source,
         map((val) => val + 1)
@@ -34,8 +33,7 @@ describe('map', () => {
     })
     class HostComponent {
       readonly source = signal(0);
-      readonly signalPipe = createSignalPipe();
-      readonly mapped = this.signalPipe(
+      readonly mapped = signalPipe(
         this.source,
         map((x) => x * 2)
       );

@@ -8,7 +8,7 @@ Welcome to the documentation for Signal Utils! This guide will help you get star
 
 ## Installation
 
-To start using Your Signal Library in your Angular project, follow these steps:
+To start using @ngbox/signal-utils in your Angular project, follow these steps:
 
 1. Install the library using npm or yarn:
 
@@ -25,9 +25,21 @@ To start using Your Signal Library in your Angular project, follow these steps:
 Signal Utils provides operators that allow you to transform, filter, debounce, and more, just like in RxJS. Here's an example using the <code>filter</code> operator.
 
 ```ts
-const signalPipe = createSignalPipe();
-userActivity = signal(0);
-filteredActivity = signalPipe(userActivity, filter((activity) => activity !== 'Inactive');
+@Component({
+  template: `
+    <span> interval: {{ intervalRef.interval() }} </span>
+    <span> last 3 fibonacci number: {{ last3FibonacciNumber() }} </span>
+  `,
+})
+export class MyComponent {
+  readonly intervalRef = createInterval();
+
+  readonly last3FibonacciNumber = signalPipe(
+    this.intervalRef.interval(),
+    filter((value) => isFibonacci(value)),
+    bufferCount(3)
+  );
+}
 ```
 
 ## Additional Resources

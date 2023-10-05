@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { createSignalPipe } from '../pipe-signal';
+import { signalPipe } from '../pipe-signal';
 import { filter } from '../filter';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -7,7 +7,6 @@ describe('filter', () => {
   it('emit initial value if predicate returns true', () => {
     TestBed.runInInjectionContext(() => {
       const source = signal<number>(0);
-      const signalPipe = createSignalPipe();
       const filtered = signalPipe(
         source,
         filter(() => true)
@@ -20,17 +19,16 @@ describe('filter', () => {
     });
   });
 
-  it('be undefined if predicate returns false', () => {
+  it('be null if predicate returns false', () => {
     TestBed.runInInjectionContext(() => {
       const source = signal<number>(0);
-      const signalPipe = createSignalPipe();
       const filtered = signalPipe(
         source,
         filter(() => false)
       );
 
       const actual = filtered();
-      const expected = undefined;
+      const expected = null;
 
       expect(actual).toBe(expected);
     });
@@ -43,8 +41,7 @@ describe('filter', () => {
     })
     class HostComponent {
       readonly source = signal(0);
-      readonly signalPipe = createSignalPipe();
-      readonly filtered = this.signalPipe(
+      readonly filtered = signalPipe(
         this.source,
         filter((x) => Boolean(x % 2))
       );
